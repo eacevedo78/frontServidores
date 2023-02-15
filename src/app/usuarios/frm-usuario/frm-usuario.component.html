@@ -6,14 +6,19 @@
     </tr>
     <tr>
         <td>Correo: </td>
-        <td><input type="text"/></td>
+        <td><input [(ngModel)]="usuario.correo" type="text"/></td>
     </tr>
     <tr>
         <td>Password: </td>
-        <td><input type="password"/></td>
+        <td><input [(ngModel)]="usuario.password" type="text"/></td>
     </tr>
     <tr>
         <td>Rol: </td>
-        <td><input type="text"/></td>
+        <td>
+            <select name="rol" [(ngModel)]="usuario.rol">
+                <option value="USU">Usuario</option>
+                <option value="ADM">Administrador</option>
+            </select>
+        </td>
     </tr>
 </table>

@@ -7,6 +7,7 @@
             <th>Nombre</th>
             <th>Ip</th>
             <th>Descripción</th>
+            <th>&ngsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,10 @@
             <td>{{s.nombre}}</td>
             <td>{{s.ip}}</td>
             <td>{{s.descripcion}}</td>
+            <td>
+                <a routerLink="/servidor/{{s.id}}/edit">Editar</a><br>
+                <a routerLink="/servidor/{{s.id}}/aplicaciones">Apps</a>
+            </td>
         </tr>
     </tbody>
 </table>

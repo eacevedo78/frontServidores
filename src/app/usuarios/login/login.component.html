@@ -1,0 +1,20 @@
+<h3>Inicio de Sesión</h3>
+<form ngNativeValidate (ngSubmit)="login()">
+<table>
+    <tbody>
+        <tr>
+            <td>Usuario: </td>
+            <td><input type="text" [(ngModel)]="email" name="email" required/></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password"  [(ngModel)]="password" name="password" required/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Entrar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</form>

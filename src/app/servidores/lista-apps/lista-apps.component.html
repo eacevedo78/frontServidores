@@ -1,0 +1,20 @@
+<p>Aplicaciones de: XXXXXX</p>
+
+<table>
+    <thead>
+        <tr  style="border:1px solid gainsboro">
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Version</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let app of aplicaciones">
+            <td>{{app.id}}</td>
+            <td>{{app.nombre}}</td>
+            <td>{{app.version}}</td>
+            <td><a routerLink="/usuario/{{app.id}}/edit">Editar</a></td>
+        </tr>
+    </tbody>
+</table>

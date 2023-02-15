@@ -5,13 +5,15 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { FrmUsuarioComponent } from './frm-usuario/frm-usuario.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     UsuarioComponent,
     ListaUsuariosComponent,
-    FrmUsuarioComponent
+    FrmUsuarioComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
