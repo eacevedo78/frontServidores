@@ -2,7 +2,7 @@
 <table>
     <tr>
         <td>Nombre: </td>
-        <td><input type="text"/></td>
+        <td><input [(ngModel)]="usuario.nombre" type="text"/></td>
     </tr>
     <tr>
         <td>Correo: </td>
@@ -11,5 +11,9 @@
     <tr>
         <td>Password: </td>
         <td><input type="password"/></td>
+    </tr>
+    <tr>
+        <td>Rol: </td>
+        <td><input type="text"/></td>
     </tr>
 </table>

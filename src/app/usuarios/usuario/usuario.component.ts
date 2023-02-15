@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from '../../models/usuario'
 
 @Component({
   selector: 'app-usuario',
@@ -7,5 +7,5 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./usuario.component.css']
 })
 export class UsuarioComponent {
-  usuario : Usuario = new Usuario();
+  usuario : Usuario = {id:1,nombre:'sadfasd',password:'asfdasd',correo:'asfdsad',rol:'asdfasd'};
 }

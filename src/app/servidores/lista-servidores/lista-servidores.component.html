@@ -1,0 +1,20 @@
+<h2>Lista de Servidores</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Ip</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of servidores">
+            <td>{{s.id}}</td>
+            <td>{{s.nombre}}</td>
+            <td>{{s.ip}}</td>
+            <td>{{s.descripcion}}</td>
+        </tr>
+    </tbody>
+</table>

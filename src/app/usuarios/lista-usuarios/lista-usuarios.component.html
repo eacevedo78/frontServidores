@@ -1,5 +1,24 @@
-<p>Usuarios</p>
+<h3>Lista de Usuarios</h3>
 
-<div *ngFor="let usu of usuarios">
-    {{usu.nombre}}
-</div>
+<table>
+    <thead>
+        <tr  style="border:1px solid gainsboro">
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Password</th>
+            <th>Rol</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let u of usuarios">
+            <td>{{u.id}}</td>
+            <td>{{u.nombre}}</td>
+            <td>{{u.correo}}</td>
+            <td>{{u.password}}</td>
+            <td>{{u.rol}}</td>
+            <td><a routerLink="/servidor/{{u.id}}/edit">Editar</a></td>
+        </tr>
+    </tbody>
+</table>
