@@ -1,16 +1,19 @@
 <p>Usuario</p>
-<table>
+<table *ngIf="usuario">
     <tr>
         <td>Nombre: </td>
-        <td><input [(ngModel)]="usuario.nombre" type="text"/></td>
+        <td>
+            <input [(ngModel)]="usuario.id" type="hidden"/>
+            <input [(ngModel)]="usuario!.nombre" type="text"/>
+        </td>
     </tr>
     <tr>
         <td>Correo: </td>
-        <td><input [(ngModel)]="usuario.correo" type="text"/></td>
+        <td><input [(ngModel)]="usuario!.correo" type="text"/></td>
     </tr>
     <tr>
         <td>Password: </td>
-        <td><input [(ngModel)]="usuario.password" type="text"/></td>
+        <td><input [(ngModel)]="usuario!.password" type="text"/></td>
     </tr>
     <tr>
         <td>Rol: </td>
@@ -19,6 +22,11 @@
                 <option value="USU">Usuario</option>
                 <option value="ADM">Administrador</option>
             </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click)="guardar()">Guardar</button>
         </td>
     </tr>
 </table>

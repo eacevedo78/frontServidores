@@ -9,11 +9,18 @@ import { Servidor } from '../../models/servidor';
   styleUrls: ['./lista-servidores.component.css']
 })
 export class ListaServidoresComponent implements OnInit {
-  servidores!:Servidor[];
+  servidores!:Servidor[] | null;
 
-  constructor(private servidoresService: ServidoresService){}
+  constructor(private servidoresService: ServidoresService){ }
 
   ngOnInit(){
-    this.servidores= this.servidoresService.getServidores();
+    this.servidoresService.getServidores().subscribe({
+      next: (res) =>{
+        this.servidores=res.body;
+      },
+      error: (e) =>{
+        alert("Error al consultar servidores");
+      }
+    });
   }
 }

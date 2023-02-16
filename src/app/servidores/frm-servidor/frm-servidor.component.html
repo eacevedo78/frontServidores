@@ -1,8 +1,12 @@
 <p>Servidor</p>
-<table>
+<table *ngIf="servidor">
     <tr>
+
         <td>Nombre: </td>
-        <td><input [(ngModel)]="servidor.nombre" type="text"/></td>
+        <td>
+            <input [(ngModel)]="servidor.id" type="hidden"/>
+            <input [(ngModel)]="servidor.nombre" type="text"/>
+        </td>
     </tr>
     <tr>
         <td>Ip: </td>
@@ -11,5 +15,10 @@
     <tr>
         <td>Descripcion: </td>
         <td><input [(ngModel)]="servidor.descripcion" type="text"/></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click)="guardar()">Guardar</button>
+        </td>
     </tr>
 </table>

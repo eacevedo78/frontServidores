@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navegacion',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./navegacion.component.css']
 })
 export class NavegacionComponent {
+
+  constructor(private router:Router) { }
+
+  logueado():boolean{
+    if(localStorage.getItem('token')!=null)
+      return true;
+    else
+      return false;
+  }
+
+  cerrar(){
+    localStorage.clear();
+    this.router.navigate(['/usuarios']);
+  }
 
 }

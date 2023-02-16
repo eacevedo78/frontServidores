@@ -6,6 +6,7 @@ import { FrmUsuarioComponent } from './frm-usuario/frm-usuario.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { ListaCredComponent } from './lista-cred/lista-cred.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LoginComponent } from './login/login.component';
     UsuarioComponent,
     ListaUsuariosComponent,
     FrmUsuarioComponent,
-    LoginComponent
+    LoginComponent,
+    ListaCredComponent
   ],
   imports: [
     CommonModule,

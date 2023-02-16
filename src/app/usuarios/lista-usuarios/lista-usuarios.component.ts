@@ -9,12 +9,15 @@ import { Usuario } from '../../models/usuario';
   styleUrls: ['./lista-usuarios.component.css']
 })
 export class ListaUsuariosComponent implements OnInit {
-  usuarios!:Usuario[];
+  usuarios!:Usuario[]|null;
 
   constructor(private servidoresService:ServidoresService){}
 
   ngOnInit(){
-    this.usuarios= this.servidoresService.getUsuarios();
+    this.servidoresService.getUsuarios().subscribe({
+      next: (res) =>{this.usuarios=res.body},
+      error: (e) => {console.log(e)}
+    });
   }
 
 }

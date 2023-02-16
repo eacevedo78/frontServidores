@@ -1,5 +1,5 @@
 
-<h3>{{aplicacion!.id==0 ? "Agregar" : "Modificar"}}</h3>
+<h3>{{credencial!.id==0 ? "Agregar" : "Modificar"}}</h3>
 <table class="nav2">
     <tr>
         <td>
@@ -10,17 +10,17 @@
         </td>
     </tr>
 </table>
-<table *ngIf="aplicacion" style="width:40%">
+<table *ngIf="credencial" style="width:40%">
     <tr>
-        <td>Nombre: </td>
+        <td>Login: </td>
         <td>
-            <input [(ngModel)]="aplicacion!.id" type="hidden"/>
-            <input [(ngModel)]="aplicacion!.nombre" type="text"/>
+            <input [(ngModel)]="credencial!.id" type="hidden"/>
+            <input [(ngModel)]="credencial!.login" type="text"/>
         </td>
     </tr>
     <tr>
-        <td>Version: </td>
-        <td><input [(ngModel)]="aplicacion!.version" type="text"/></td>
+        <td>Password: </td>
+        <td><input [(ngModel)]="credencial!.password" type="text"/></td>
     </tr>
     <tr>
         <td colspan="2">
@@ -39,13 +39,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let app of aplicaciones">
-            <td>{{app.id}}</td>
-            <td>{{app.nombre}}</td>
-            <td>{{app.version}}</td>
+        <tr *ngFor="let cred of credenciales">
+            <td>{{cred.id}}</td>
+            <td>{{cred.login}}</td>
+            <td>{{cred.password}}</td>
+            <td>{{cred.aplicacion!.nombre}}</td>
             <td>
                 <a style="font-size: 1.8em" href="javascript: void(0);" title="Editar"
-                (click)="editar(app!.id)">&#9997;</a>
+                (click)="editar(cred!.id)">&#9997;</a>
             </td>
         </tr>
     </tbody>

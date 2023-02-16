@@ -1,5 +1,14 @@
-<h2>Lista de Servidores</h2>
+<h3>Lista de Servidores</h3>
 
+<table class="nav2">
+    <tr>
+        <td>
+            <a style="font-size: 1em;" routerLink="/servidor" title="Nuevo Servidor">
+                Nuevo Servidor
+            </a>
+        </td>
+    </tr>
+</table>
 <table>
     <thead>
         <tr>
@@ -17,8 +26,9 @@
             <td>{{s.ip}}</td>
             <td>{{s.descripcion}}</td>
             <td>
-                <a routerLink="/servidor/{{s.id}}/edit">Editar</a><br>
-                <a routerLink="/servidor/{{s.id}}/aplicaciones">Apps</a>
+                <a style="font-size: 1.8em" routerLink="/servidor/{{s.id}}" title="Editar">&#9997;</a>
+                &nbsp;
+                <a style="font-size: 1.8em" routerLink="/servidor/{{s.id}}/aplicaciones" title="Aplicacioens">&#10070;</a>
             </td>
         </tr>
     </tbody>

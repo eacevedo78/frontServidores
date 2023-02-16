@@ -1,5 +1,14 @@
 <h3>Lista de Usuarios</h3>
 
+<table class="nav2">
+    <tr>
+        <td>
+            <a style="font-size: 1em;" routerLink="/usuario" title="Nuevo Usuario">
+                Nuevo Usuario
+            </a>
+        </td>
+    </tr>
+</table>
 <table>
     <thead>
         <tr  style="border:1px solid gainsboro">
@@ -16,9 +25,12 @@
             <td>{{u.id}}</td>
             <td>{{u.nombre}}</td>
             <td>{{u.correo}}</td>
-            <td>{{u.password}}</td>
+            <td>{{"*********"}}</td>
             <td>{{u.rol}}</td>
-            <td><a routerLink="/usuario/{{u.id}}/edit">Editar</a></td>
+            <td>
+                <a style="font-size: 1.8em" routerLink="/usuario/{{u.id}}" title="Editar">&#9997;</a>&nbsp;
+                <a style="font-size: 1.8em" routerLink="/usuario/{{u.id}}/credenciales" title="Aplicacioens">&#x26B7;</a>
+            </td>
         </tr>
     </tbody>
 </table>

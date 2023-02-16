@@ -18,13 +18,15 @@ export class LoginComponent {
   }
 
   login(){
-    this.servidoresService.login(this.email,this.password).subscribe(
-      res =>{
+    this.servidoresService.login(this.email,this.password).subscribe({
+      next:(res) =>{
         let body:any = res.body;
         localStorage.setItem("token",body.token);
         localStorage.setItem("email",this.email);
         this.router.navigate(['/servidores']);
-      });
+      },
+      error: (e) =>{
+        alert("Usuario y/o password incorrectos");
+      }});
   }
-  
 }

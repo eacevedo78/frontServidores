@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 table{
     margin: auto;
+    width: 80%;
 }
 td, th{
     border:1px solid gainsboro
+}
+
+table.nav2{
+    text-align: left;
+    width: 80%;
+    margin-bottom: 1em !important;
+}
+table.nav2 td{
+    border: 0px solid white;
 }
