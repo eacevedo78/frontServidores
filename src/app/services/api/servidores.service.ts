@@ -97,12 +97,10 @@ export class ServidoresService {
     }
   }
 
-
-
   /*** Api Login ****/
   login(email:string, password:string){
     let head={'Access-Control-Expose-Headers':'Authorization'}
-    return this.httpClient.post(this.url+"login", 
+    return this.httpClient.post(this.url+"/login", 
     {"email":email,"password":password},{headers: head,observe: 'response'});
   }
 }
