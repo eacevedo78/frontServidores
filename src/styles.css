@@ -4,7 +4,7 @@ table{
     width: 80%;
 }
 td, th{
-    border:1px solid gainsboro
+    /*border:1px solid gainsboro*/
 }
 
 table.nav2{
@@ -15,3 +15,5 @@ table.nav2{
 table.nav2 td{
     border: 0px solid white;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

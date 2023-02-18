@@ -2,6 +2,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServidoresService } from 'src/app/services/api/servidores.service';
+import {FormControl, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -9,20 +11,20 @@ import { ServidoresService } from 'src/app/services/api/servidores.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email!:string;
-  password!:string;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
   
   constructor(private servidoresService:ServidoresService,private router:Router){
-    this.email="";
-    this.password="";
+    //this.email="";
+    //this.password="";
   }
 
   login(){
-    this.servidoresService.login(this.email,this.password).subscribe({
+    this.servidoresService.login(this.email.value, this.password.value).subscribe({
       next:(res) =>{
         let body:any = res.body;
         localStorage.setItem("token",body.token);
-        localStorage.setItem("email",this.email);
+        localStorage.setItem("email",this.email.value || '');
         this.router.navigate(['/servidores']);
       },
       error: (e) =>{

@@ -4,9 +4,13 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { FrmUsuarioComponent } from './frm-usuario/frm-usuario.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ListaCredComponent } from './lista-cred/lista-cred.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -15,12 +19,18 @@ import { ListaCredComponent } from './lista-cred/lista-cred.component';
     ListaUsuariosComponent,
     FrmUsuarioComponent,
     LoginComponent,
-    ListaCredComponent
+    ListaCredComponent,
+    
   ],
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   exports:[
     UsuarioComponent,
