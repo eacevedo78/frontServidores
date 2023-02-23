@@ -10,15 +10,21 @@ import { Credencial } from '../../models/credencial';
 })
 export class ServidoresService {
   url="http://localhost:8080";
-  enc;
+  enc!:{[key:string]:string};
 
   constructor(private httpClient : HttpClient) {
-    let token="Bearer "+localStorage.getItem('token');
-    this.enc={'Authorization': token,'accept':'application/json'}  
   }
+
+  setToken(){
+    let token="Bearer "+localStorage.getItem('token');
+    this.enc={'Authorization': token,'accept':'application/json'}
+    console.log("SET TOJEN");
+  }
+
   /*** Api Servidores ****/
   getServidores(){
     let ruta=`${this.url}/servidores`;
+    console.log(this.enc);
     return this.httpClient.get<Servidor[]>(ruta,{headers: this.enc,observe:'response'});
   }
 

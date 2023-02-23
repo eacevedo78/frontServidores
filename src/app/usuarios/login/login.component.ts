@@ -25,6 +25,7 @@ export class LoginComponent {
         let body:any = res.body;
         localStorage.setItem("token",body.token);
         localStorage.setItem("email",this.email.value || '');
+        this.servidoresService.setToken();
         this.router.navigate(['/servidores']);
       },
       error: (e) =>{
