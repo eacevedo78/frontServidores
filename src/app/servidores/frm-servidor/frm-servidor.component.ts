@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Servidor } from 'src/app/models/servidor';
 import { ServidoresService } from 'src/app/services/api/servidores.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-frm-servidor',
@@ -9,7 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./frm-servidor.component.css']
 })
 export class FrmServidorComponent implements OnInit {
-  servidor!:Servidor|null;
+  //servidor!:Servidor|null;
+  servidor = new FormGroup({
+    id: new FormControl<number>(0),
+    nombre: new FormControl<string>('',[Validators.required]),
+    ip: new FormControl<string>('',[Validators.required]),
+    descripcion: new FormControl<string>('',[Validators.required])
+  });
 
   constructor(private servidoresService:ServidoresService,private route:ActivatedRoute,
     private router:Router){

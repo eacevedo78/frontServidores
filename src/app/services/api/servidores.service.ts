@@ -13,18 +13,18 @@ export class ServidoresService {
   enc!:{[key:string]:string};
 
   constructor(private httpClient : HttpClient) {
+    this.setToken();
   }
 
   setToken(){
     let token="Bearer "+localStorage.getItem('token');
     this.enc={'Authorization': token,'accept':'application/json'}
-    console.log("SET TOJEN");
   }
 
   /*** Api Servidores ****/
   getServidores(){
     let ruta=`${this.url}/servidores`;
-    console.log(this.enc);
+    //console.log("Encabezado",this.enc);
     return this.httpClient.get<Servidor[]>(ruta,{headers: this.enc,observe:'response'});
   }
 

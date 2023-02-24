@@ -19,7 +19,7 @@ export class NavegacionComponent {
 
   cerrar(){
     localStorage.clear();
-    this.router.navigate(['/usuarios']);
+    this.router.navigate(['/login']);
   }
 
 }

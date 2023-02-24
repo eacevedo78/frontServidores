@@ -4,8 +4,14 @@ import { ServidorComponent } from './servidor/servidor.component';
 import { ListaServidoresComponent } from './lista-servidores/lista-servidores.component';
 import { RouterModule } from '@angular/router';
 import { FrmServidorComponent } from './frm-servidor/frm-servidor.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaAppsComponent } from './lista-apps/lista-apps.component';
+import { MatTableModule} from '@angular/material/table'
+import { MatFormFieldModule} from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +23,12 @@ import { ListaAppsComponent } from './lista-apps/lista-apps.component';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ],
   exports:[
     ServidorComponent

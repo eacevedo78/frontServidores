@@ -29,7 +29,6 @@ export class LoginComponent {
         this.router.navigate(['/servidores']);
       },
       error: (e) =>{
-        console.log(e);
         alert("Usuario y/o password incorrectos");
       }});
   }

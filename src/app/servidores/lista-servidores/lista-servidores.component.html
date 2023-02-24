@@ -9,7 +9,44 @@
         </td>
     </tr>
 </table>
-<table>
+<mat-form-field style="width: 50%">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="filtrar($event)" #input>
+</mat-form-field>
+<table mat-table [dataSource]="servidores" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let servidor">{{servidor.nombre}}</td>
+    </ng-container>
+    <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let servidor">{{servidor.nombre}}</td>
+    </ng-container>
+    <ng-container matColumnDef="ip">
+        <th mat-header-cell *matHeaderCellDef>IP</th>
+        <td mat-cell *matCellDef="let servidor">{{servidor.ip}}</td>
+    </ng-container>
+    <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let servidor">{{servidor.descripcion}}</td>
+    </ng-container>
+    <ng-container matColumnDef="opcion">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let servidor">
+            <a style="font-size: 1.8em" routerLink="/servidor/{{servidor.id}}">
+                <mat-icon fontIcon="edit_document">
+                </mat-icon>
+            </a>
+            <a style="font-size: 1.8em" routerLink="/servidor/{{servidor.id}}/aplicaciones">
+                <mat-icon fontIcon="grid_view">
+                </mat-icon>
+            </a>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['id','nombre','ip','descripcion','opcion']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id','nombre','ip','descripcion','opcion']"></tr>
+</table>
+<!--
     <thead>
         <tr>
             <th>id</th>
@@ -33,3 +70,4 @@
         </tr>
     </tbody>
 </table>
+-->

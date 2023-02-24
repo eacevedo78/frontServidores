@@ -1,10 +1,14 @@
 <p>Servidor</p>
-<table *ngIf="servidor">
+<table *ngIf="servidor" [formGroup]="servidor">
     <tr>
-
-        <td>Nombre: </td>
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" name="nombre" required>
+            <mat-error *ngIf="nombre.invalid">El nombre es obligatorio</mat-error>
+            <input formControlName="id" type="hidden"/>
+        </mat-form-field>
         <td>
-            <input [(ngModel)]="servidor.id" type="hidden"/>
+            
             <input [(ngModel)]="servidor.nombre" type="text"/>
         </td>
     </tr>
