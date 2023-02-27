@@ -10,17 +10,19 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./frm-servidor.component.css']
 })
 export class FrmServidorComponent implements OnInit {
-  //servidor!:Servidor|null;
-  servidor = new FormGroup({
-    id: new FormControl<number>(0),
-    nombre: new FormControl<string>('',[Validators.required]),
-    ip: new FormControl<string>('',[Validators.required]),
-    descripcion: new FormControl<string>('',[Validators.required])
-  });
+  servidor!:Servidor|null;
+  frmServidor:FormGroup;
 
   constructor(private servidoresService:ServidoresService,private route:ActivatedRoute,
     private router:Router){
     this.servidor={id:0,nombre:"",ip:"",descripcion:""}
+    this.frmServidor = new FormGroup({
+      id: new FormControl(this.servidor.id),
+      nombre: new FormControl(this.servidor.nombre,[Validators.required]),
+      ip: new FormControl(this.servidor.ip,[Validators.required]),
+      descripcion: new FormControl(this.servidor.descripcion,[Validators.required])
+    });
+
   }
 
   ngOnInit(){
@@ -28,11 +30,18 @@ export class FrmServidorComponent implements OnInit {
     if(!id)//si no viene id es que es uno nuevo
       return;
     this.servidoresService.getServidor(id).subscribe({
-      next: (res)=>{this.servidor=res.body},
+      next: (res)=>{
+        this.servidor=res.body;
+        let obj = Object.assign({},this.servidor);
+        this.frmServidor.patchValue(obj);
+      },
       error: (e)=>{console.log(e);alert(e)}
     });
   }
   guardar(){
+    if(!this.frmServidor.valid )
+      return;
+    this.servidor = Object.assign({},this.frmServidor.getRawValue());
     this.servidoresService.guardaServidor(this.servidor).subscribe({
       next:(res) => {
         this.router.navigate(['/servidores']);

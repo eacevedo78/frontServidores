@@ -1,28 +1,32 @@
-<p>Servidor</p>
-<table *ngIf="servidor" [formGroup]="servidor">
-    <tr>
-        <mat-form-field appearance="fill">
+<mat-card style="width:60%;margin:auto">
+    <mat-card-title style="background-color: #4758B8; color:white">Servidor</mat-card-title>
+    <mat-card-content style="margin-top:40px">
+<form [formGroup]="frmServidor" (ngSubmit)="guardar()" *ngIf="servidor">
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombre" name="nombre" required>
-            <mat-error *ngIf="nombre.invalid">El nombre es obligatorio</mat-error>
+            <mat-error *ngIf="frmServidor.controls['nombre'].hasError('required')">El nombre es obligatorio</mat-error>
             <input formControlName="id" type="hidden"/>
         </mat-form-field>
-        <td>
-            
-            <input [(ngModel)]="servidor.nombre" type="text"/>
-        </td>
-    </tr>
-    <tr>
-        <td>Ip: </td>
-        <td><input [(ngModel)]="servidor.ip" type="text"/></td>
-    </tr>
-    <tr>
-        <td>Descripcion: </td>
-        <td><input [(ngModel)]="servidor.descripcion" type="text"/></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="guardar()">Guardar</button>
-        </td>
-    </tr>
-</table>
+    </div>
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label>IP</mat-label>
+            <input matInput formControlName="ip" name="ip" required>
+            <mat-error *ngIf="frmServidor.controls['ip'].hasError('required')">El nombre es obligatorio</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label>Descripción</mat-label>
+            <input matInput formControlName="descripcion" name="descripcion" required>
+            <mat-error *ngIf="frmServidor.controls['descripcion'].hasError('required')">La descripción es obligatoria</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </div>
+</form>
+</mat-card-content>
+</mat-card>
