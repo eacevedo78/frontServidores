@@ -46,28 +46,3 @@
     <tr mat-header-row *matHeaderRowDef="['id','nombre','ip','descripcion','opcion']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['id','nombre','ip','descripcion','opcion']"></tr>
 </table>
-<!--
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Ip</th>
-            <th>Descripción</th>
-            <th>&ngsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let s of servidores">
-            <td>{{s.id}}</td>
-            <td>{{s.nombre}}</td>
-            <td>{{s.ip}}</td>
-            <td>{{s.descripcion}}</td>
-            <td>
-                <a style="font-size: 1.8em" routerLink="/servidor/{{s.id}}" title="Editar">&#9997;</a>
-                &nbsp;
-                <a style="font-size: 1.8em" routerLink="/servidor/{{s.id}}/aplicaciones" title="Aplicacioens">&#10070;</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
--->

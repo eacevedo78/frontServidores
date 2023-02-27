@@ -1,32 +1,41 @@
-<p>Usuario</p>
-<table *ngIf="usuario">
-    <tr>
-        <td>Nombre: </td>
-        <td>
-            <input [(ngModel)]="usuario.id" type="hidden"/>
-            <input [(ngModel)]="usuario!.nombre" type="text"/>
-        </td>
-    </tr>
-    <tr>
-        <td>Correo: </td>
-        <td><input [(ngModel)]="usuario!.correo" type="text"/></td>
-    </tr>
-    <tr>
-        <td>Password: </td>
-        <td><input [(ngModel)]="usuario!.password" type="text"/></td>
-    </tr>
-    <tr>
-        <td>Rol: </td>
-        <td>
-            <select name="rol" [(ngModel)]="usuario.rol">
+<mat-card style="width:60%;margin:auto">
+    <mat-card-title style="background-color: #4758B8; color:white">Servidor</mat-card-title>
+    <mat-card-content style="margin-top:40px">
+<form [formGroup]="frmUsuario" *ngIf="usuario" (ngSubmit)="guardar()">
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" name="nombre" required>
+            <mat-error *ngIf="frmUsuario.controls['nombre'].hasError('required')">El nombre es obligatorio</mat-error>
+            <input formControlName="id" type="hidden"/>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="correo" name="correo" required>
+            <mat-error *ngIf="frmUsuario.controls['correo'].hasError('required')">El nombre es obligatorio</mat-error>
+            <mat-error *ngIf="frmUsuario.controls['correo'].hasError('email')">Formato incorrecto</mat-error>
+        </mat-form-field>
+    </div>
+    
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" name="password" required>
+            <mat-error *ngIf="frmUsuario.controls['password'].hasError('required')">El password es obligatorio</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label>Rol</mat-label>
+            <select matNativeControl [value]="usuario.rol" required>
                 <option value="USU">Usuario</option>
                 <option value="ADM">Administrador</option>
             </select>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="guardar()">Guardar</button>
-        </td>
-    </tr>
-</table>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </div>
+</form>

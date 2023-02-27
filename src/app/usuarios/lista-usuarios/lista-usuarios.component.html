@@ -9,28 +9,44 @@
         </td>
     </tr>
 </table>
-<table>
-    <thead>
-        <tr  style="border:1px solid gainsboro">
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Password</th>
-            <th>Rol</th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let u of usuarios">
-            <td>{{u.id}}</td>
-            <td>{{u.nombre}}</td>
-            <td>{{u.correo}}</td>
-            <td>{{"*********"}}</td>
-            <td>{{u.rol}}</td>
-            <td>
-                <a style="font-size: 1.8em" routerLink="/usuario/{{u.id}}" title="Editar">&#9997;</a>&nbsp;
-                <a style="font-size: 1.8em" routerLink="/usuario/{{u.id}}/credenciales" title="Aplicacioens">&#x26B7;</a>
-            </td>
-        </tr>
-    </tbody>
+<mat-form-field style="width: 50%">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="filtrar($event)" #input>
+</mat-form-field>
+<table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let usuario">{{usuario.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let usuario">{{usuario.nombre}}</td>
+    </ng-container>
+    <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef>Correo</th>
+        <td mat-cell *matCellDef="let usuario">{{usuario.correo}}</td>
+    </ng-container>
+    <ng-container matColumnDef="password">
+        <th mat-header-cell *matHeaderCellDef>Password</th>
+        <td mat-cell *matCellDef="let usuario">{{usuario.password}}</td>
+    </ng-container>
+    <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let usuario">{{usuario.rol}}</td>
+    </ng-container>
+    <ng-container matColumnDef="opcion">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let usuario">
+            <a style="font-size: 1.8em" routerLink="/usuario/{{usuario.id}}">
+                <mat-icon fontIcon="edit_document">
+                </mat-icon>
+            </a>
+            <a style="font-size: 1.8em" routerLink="/usuario/{{usuario.id}}/credenciales">
+                <mat-icon fontIcon="key">
+                </mat-icon>
+            </a>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['id','nombre','correo','password','rol','opcion']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id','nombre','correo','password','rol','opcion']"></tr>
 </table>
