@@ -10,25 +10,60 @@
         </td>
     </tr>
 </table>
-<table *ngIf="aplicacion" style="width:40%">
-    <tr>
-        <td>Nombre: </td>
-        <td>
-            <input [(ngModel)]="aplicacion!.id" type="hidden"/>
-            <input [(ngModel)]="aplicacion!.nombre" type="text"/>
-        </td>
-    </tr>
-    <tr>
-        <td>Version: </td>
-        <td><input [(ngModel)]="aplicacion!.version" type="text"/></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="guardar()">Guardar</button>
-        </td>
-    </tr>
-</table>
-<h3>Listado de Aplicaciones</h3>
+
+<mat-card style="width:60%;margin:auto">
+    <mat-card-title style="background-color: #4758B8; color:white">Aplicaciones</mat-card-title>
+    <mat-card-content style="margin-top:40px">
+        <form [formGroup]="frmApp" *ngIf="aplicacion" (ngSubmit)="guardar()">
+            <div>
+                <mat-form-field appearance="fill" style="width: 50%">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" name="nombre" required>
+                    <mat-error *ngIf="frmApp.controls['nombre'].hasError('required')">El nombre es obligatorio</mat-error>
+                    <input formControlName="id" type="hidden"/>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill" style="width: 50%">
+                    <mat-label>Versión</mat-label>
+                    <input matInput formControlName="version" name="version" required>
+                    <mat-error *ngIf="frmApp.controls['version'].hasError('required')">La versión es obligatorio</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" type="submit">Guardar</button>
+            </div>
+        </form>
+        <br><br>
+        <h3>Listado de Aplicaciones</h3>
+        <table mat-table [dataSource]="aplicaciones" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>id</th>
+                <td mat-cell *matCellDef="let app">{{app.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let app">{{app.nombre}}</td>
+            </ng-container>
+            <ng-container matColumnDef="version">
+                <th mat-header-cell *matHeaderCellDef>Versión</th>
+                <td mat-cell *matCellDef="let app">{{app.version}}</td>
+            </ng-container>
+            <ng-container matColumnDef="opcion">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let app">
+                    <a style="font-size: 1.8em" href="javascript: void(0);" (click)="(editar(app.id))">
+                        <mat-icon fontIcon="edit_document">
+                        </mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="['id','nombre','version','opcion']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['id','nombre','version','opcion']"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>
+<!--
 <table>
     <thead>
         <tr  style="border:1px solid gainsboro">
@@ -50,3 +85,4 @@
         </tr>
     </tbody>
 </table>
+-->

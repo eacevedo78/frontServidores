@@ -10,44 +10,59 @@
         </td>
     </tr>
 </table>
-<table *ngIf="credencial" style="width:40%">
-    <tr>
-        <td>Login: </td>
-        <td>
-            <input [(ngModel)]="credencial!.id" type="hidden"/>
-            <input [(ngModel)]="credencial!.login" type="text"/>
-        </td>
-    </tr>
-    <tr>
-        <td>Password: </td>
-        <td><input [(ngModel)]="credencial!.password" type="text"/></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="guardar()">Guardar</button>
-        </td>
-    </tr>
-</table>
-<h3>Listado de Aplicaciones</h3>
-<table>
-    <thead>
-        <tr  style="border:1px solid gainsboro">
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Version</th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let cred of credenciales">
-            <td>{{cred.id}}</td>
-            <td>{{cred.login}}</td>
-            <td>{{cred.password}}</td>
-            <td>{{cred.aplicacion!.nombre}}</td>
-            <td>
-                <a style="font-size: 1.8em" href="javascript: void(0);" title="Editar"
-                (click)="editar(cred!.id)">&#9997;</a>
+<mat-card style="width:60%;margin:auto">
+    <mat-card-title style="background-color: #4758B8; color:white">Credenciales</mat-card-title>
+    <mat-card-content style="margin-top:40px">
+    <form [formGroup]="frmCred" *ngIf="credencial" (ngSubmit)="guardar()">
+        <div>
+            <mat-form-field appearance="fill" style="width: 50%">
+                <mat-label>Login</mat-label>
+                <input matInput formControlName="login" name="login" required>
+                <mat-error *ngIf="frmCred.controls['login'].hasError('required')">El login es obligatorio</mat-error>
+                <input formControlName="id" type="hidden"/>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill" style="width: 50%">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" name="password" required>
+                <mat-error *ngIf="frmCred.controls['password'].hasError('required')">El password es obligatorio</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" type="submit">Guardar</button>
+        </div>
+    </form>
+    <br><br>
+    <h3>Listado de Aplicaciones</h3>
+    <table mat-table [dataSource]="credenciales" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>id</th>
+            <td mat-cell *matCellDef="let cred">{{cred.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="login">
+            <th mat-header-cell *matHeaderCellDef>Login</th>
+            <td mat-cell *matCellDef="let cred">{{cred.login}}</td>
+        </ng-container>
+        <ng-container matColumnDef="password">
+            <th mat-header-cell *matHeaderCellDef>Password</th>
+            <td mat-cell *matCellDef="let cred">{{cred.password}}</td>
+        </ng-container>
+        <ng-container matColumnDef="aplicacion">
+            <th mat-header-cell *matHeaderCellDef>Aplicación</th>
+            <td mat-cell *matCellDef="let cred">{{cred.aplicacion.nombre}}</td>
+        </ng-container>
+        <ng-container matColumnDef="opcion">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let cred">
+                <a style="font-size: 1.8em" href="javascript: void(0);" (click)="(editar(cred.id))">
+                    <mat-icon fontIcon="edit_document">
+                    </mat-icon>
+                </a>
             </td>
-        </tr>
-    </tbody>
-</table>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['id','login','password','aplicacion','opcion']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['id','login','password','aplicacion','opcion']"></tr>
+    </table>
+    </mat-card-content>
+</mat-card>
