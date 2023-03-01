@@ -30,6 +30,15 @@
             </mat-form-field>
         </div>
         <div>
+            <mat-form-field appearance="fill" style="width: 50%">
+                <mat-label>Aplicación</mat-label>
+                <select matNativeControl name="aplicacionId" formControlName="aplicacionId" required>
+                    <option *ngFor="let app of aplicaciones" value="{{app.id}}">{{app.servidorNombre}} - {{app.nombre}} {{app.version}}</option>
+                </select>
+                <mat-error *ngIf="frmCred.controls['aplicacionId'].hasError('required')">La aplicación es obligatoria</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
             <button mat-raised-button color="primary" type="submit">Guardar</button>
         </div>
     </form>

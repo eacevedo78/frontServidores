@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Credencial } from 'src/app/models/credencial';
+import { Aplicacion } from 'src/app/models/aplicacion';
 import { ServidoresService } from 'src/app/services/api/servidores.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, NonNullableFormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-lista-cred',
@@ -14,6 +15,7 @@ export class ListaCredComponent implements OnInit {
   credenciales:any;//!:Credencial[]|null;
   credencial!:Credencial|null;
   frmCred:FormGroup;
+  aplicaciones:any;
 
   constructor(private servidoresService:ServidoresService,private route:ActivatedRoute,
     private router:Router){
@@ -22,9 +24,11 @@ export class ListaCredComponent implements OnInit {
       id: new FormControl(this.credencial.id),
       login: new FormControl(this.credencial.login,[Validators.required]),
       password: new FormControl(this.credencial.password,[Validators.required]),
+      aplicacionId: new FormControl(this.credencial.aplicacion?.id,[Validators.required]),
     })
   }
   ngOnInit(): void {
+      this.apps();
       this.consulta();
   }
 
@@ -33,7 +37,9 @@ export class ListaCredComponent implements OnInit {
       return;
     let usuarioId:number=this.route.snapshot.params['id'];
     this.credencial = Object.assign({},this.frmCred.getRawValue());
-    this.servidoresService.guardaCredencial(usuarioId,this.credencial).subscribe({
+    //console.log(this.frmCred.get('aplicacionId')?.value);
+    let aplicacionId= this.frmCred.get('aplicacionId')?.value;
+    this.servidoresService.guardaCredencial(usuarioId,Number(aplicacionId),this.credencial).subscribe({
       next:(res) => {
         this.consulta();
       },
@@ -46,7 +52,9 @@ export class ListaCredComponent implements OnInit {
     this.servidoresService.getCredencial(usuarioId,id).subscribe({
       next: (res)=>{
         this.credencial=res.body;
-        let obj = Object.assign({},this.credencial);
+        let obj:any = Object.assign({},this.credencial);
+        obj.aplicacionId = this.credencial!.aplicacion!.id;
+        //console.log(this.credencial);
         this.frmCred.patchValue(obj);
       },
       error: (e) => {console.log(e)}
@@ -59,14 +67,24 @@ export class ListaCredComponent implements OnInit {
   
   consulta(){
     let id=this.route.snapshot.params['id'];
-      this.servidoresService.getCredenciales(id).subscribe({
-        next: (res) => {
-          this.credenciales=res.body;
-          console.log(this.credenciales);
-          this.credenciales = new MatTableDataSource(this.credenciales);
-        },
-        error: (e) => {console.log(e)}
-      });
-      this.credencial={id:0,login:'',password:'',usuario:0,aplicacion:null}
+    
+    this.servidoresService.getCredenciales(id).subscribe({
+      next: (res) => {
+        this.credenciales=res.body;
+        //console.log(this.credenciales);
+        this.credenciales = new MatTableDataSource(this.credenciales);
+      },
+      error: (e) => {console.log(e)}
+    });
+    /*this.credencial={id:0,login:'',password:'',usuario:0,aplicacion:null}
+    this.frmCred.reset(Object.assign({},this.credencial));*/
+  }
+  apps(){
+    this.servidoresService.getAppSrv().subscribe({
+      next: (res) => {
+        this.aplicaciones=res.body;
+      },
+      error: (e) => {console.log(e)}
+    });
   }
 }

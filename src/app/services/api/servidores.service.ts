@@ -70,6 +70,10 @@ export class ServidoresService {
     let ruta=`${this.url}/servidor/${servidorId}/aplicaciones`;
     return this.httpClient.get<Aplicacion[]>(ruta,{headers: this.enc,observe:'response'});
   }
+  getAppSrv(){
+    let ruta=`${this.url}/aplicaciones`;
+    return this.httpClient.get<Aplicacion[]>(ruta,{headers: this.enc,observe:'response'});
+  }
   getAplicacion(servidorId:number,id:number){
     let ruta=`${this.url}/servidor/${servidorId}/aplicacion/${id}`;
     return this.httpClient.get<Aplicacion>(ruta,{headers: this.enc,observe:'response'});
@@ -93,12 +97,12 @@ export class ServidoresService {
     let ruta=`${this.url}/usuario/${usuarioId}/credencial/${id}`;
     return this.httpClient.get<Credencial>(ruta,{headers: this.enc,observe:'response'});
   }
-  guardaCredencial(usuarioId:number,cred:Credencial|null){
+  guardaCredencial(usuarioId:number,aplicacionId:number,cred:Credencial|null){
     let ruta=`${this.url}/usuario/${usuarioId}/credencial`;
     if(cred!.id==0)
       return this.httpClient.post<Credencial>(ruta,cred,{headers: this.enc,observe:'response'});
     else{
-      ruta=`${this.url}/usuario/${usuarioId}/credencial/${cred!.id}`;
+      ruta=`${this.url}/usuario/${usuarioId}/aplicacion/${aplicacionId}/credencial/${cred!.id}`;
       return this.httpClient.put<Credencial>(ruta,cred,{headers: this.enc,observe:'response'});
     }
   }
