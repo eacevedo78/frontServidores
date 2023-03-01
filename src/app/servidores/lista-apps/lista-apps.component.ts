@@ -37,7 +37,17 @@ export class ListaAppsComponent implements OnInit {
       next:(res) => {
         this.consulta();
       },
-      error: (e) =>{console.log(e); }
+      error: (e) =>{
+        if(e.status == 400){
+          //console.log(e.error.errores);
+          let msg =''
+          Object.keys(e.error.errores).map(k =>{
+            msg+=e.error.errores[k]+" \n";
+          });
+          alert(msg);
+        }else
+          console.log(e);
+      }
       }
     )
   }
@@ -49,12 +59,13 @@ export class ListaAppsComponent implements OnInit {
         let obj = Object.assign({},this.aplicacion);
         this.frmApp.patchValue(obj);
       },
-      error: (e) => {console.log(e)}
+      error: (e) => { console.log(e.status) }
     });
   }
 
   nueva(){
     this.aplicacion={id:0,nombre:'',version:''}
+    this.frmApp.patchValue(this.aplicacion);
   }
 
   consulta(){
@@ -67,5 +78,21 @@ export class ListaAppsComponent implements OnInit {
         error: (e) => {console.log(e)}
       });
     this.aplicacion={id:0,nombre:'',version:''}
+  }
+
+  eliminar(id:number){
+    let servidorId=this.route.snapshot.params['id'];
+    this.servidoresService.eliminaAplicacion(servidorId,id).subscribe({
+      next: (res) =>{
+        this.consulta();
+      },
+      error: (e) =>{
+        //console.log(e);
+        if(e.status == 403)
+          alert("No se puede eliminar: " + e.error.detail);
+        else
+          alert("Error al consultar servidores ");
+      }
+    });
   }
 }

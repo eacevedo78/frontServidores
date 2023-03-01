@@ -15,6 +15,10 @@ export class ListaUsuariosComponent implements OnInit {
   constructor(private servidoresService:ServidoresService){}
 
   ngOnInit(){
+    this.consultar();
+  }
+
+  consultar(){
     this.servidoresService.getUsuarios().subscribe({
       next: (res) =>{
         this.usuarios=res.body;
@@ -28,6 +32,21 @@ export class ListaUsuariosComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     console.log(filterValue);
     this.usuarios.filter = filterValue.trim().toLowerCase();
+  }
+
+  eliminar(id:number){
+    this.servidoresService.eliminaUsuario(id).subscribe({
+      next: (res) =>{
+        this.consultar();
+      },
+      error: (e) =>{
+        //console.log(e);
+        if(e.status == 403)
+          alert("No se puede eliminar: " + e.error.detail);
+        else
+          alert("Error al consultar servidores ");
+      }
+    });  
   }
 
 }

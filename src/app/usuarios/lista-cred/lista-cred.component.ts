@@ -43,7 +43,17 @@ export class ListaCredComponent implements OnInit {
       next:(res) => {
         this.consulta();
       },
-      error: (e) =>{console.log(e); }
+      error: (e) =>{
+        if(e.status == 400){
+          //console.log(e.error.errores);
+          let msg =''
+          Object.keys(e.error.errores).map(k =>{
+            msg+=e.error.errores[k]+" \n";
+          });
+          alert(msg);
+        }else
+          console.log(e);
+      }
       }
     )
   }
@@ -63,6 +73,7 @@ export class ListaCredComponent implements OnInit {
 
   nueva(){
     this.credencial={id:0,login:'',password:'',usuario:0,aplicacion:null}
+    this.frmCred.patchValue(this.credencial);
   }
   
   consulta(){
@@ -86,5 +97,20 @@ export class ListaCredComponent implements OnInit {
       },
       error: (e) => {console.log(e)}
     });
+  }
+  eliminar(id:number){
+    let usuarioId:number=this.route.snapshot.params['id'];
+    this.servidoresService.eliminaCredencial(usuarioId,id).subscribe({
+      next: (res) =>{
+        this.consulta();
+      },
+      error: (e) =>{
+        //console.log(e);
+        if(e.status == 403)
+          alert("No se puede eliminar: " + e.error.detail);
+        else
+          alert("Error al consultar servidores ");
+      }
+    });  
   }
 }

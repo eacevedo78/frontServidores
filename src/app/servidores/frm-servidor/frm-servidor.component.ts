@@ -46,7 +46,17 @@ export class FrmServidorComponent implements OnInit {
       next:(res) => {
         this.router.navigate(['/servidores']);
       },
-      error: (e) =>{console.log(e); }
+      error: (e) =>{
+        if(e.status == 400){
+          //console.log(e.error.errores);
+          let msg =''
+          Object.keys(e.error.errores).map(k =>{
+            msg+=e.error.errores[k]+" \n";
+          });
+          alert(msg);
+        }else
+          console.log(e);
+      }
       }
     )
   }

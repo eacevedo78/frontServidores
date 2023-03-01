@@ -41,6 +41,10 @@ export class ServidoresService {
       return this.httpClient.put<Servidor>(ruta,servidor,{headers: this.enc,observe:'response'});
     }
   }
+  eliminaServidor(id:number){
+    let ruta=`${this.url}/servidor/${id}`;
+    return this.httpClient.delete<number>(ruta, {headers: this.enc,observe:'response'});
+  }
 
   /*** Api Usuarios ****/
 
@@ -62,6 +66,10 @@ export class ServidoresService {
       ruta=`${this.url}/usuario/${usuario!.id}`;
       return this.httpClient.put<Usuario>(ruta,usuario,{headers: this.enc,observe:'response'});
     }
+  }
+  eliminaUsuario(id:number){
+    let ruta=`${this.url}/usuario/${id}`;
+    return this.httpClient.delete<number>(ruta, {headers: this.enc,observe:'response'});
   }
 
   
@@ -87,6 +95,10 @@ export class ServidoresService {
       return this.httpClient.put<Aplicacion>(ruta,app,{headers: this.enc,observe:'response'});
     }
   }
+  eliminaAplicacion(servidorId:number, id:number){
+    let ruta=`${this.url}/servidor/${servidorId}/aplicacion/${id}`;
+    return this.httpClient.delete<number>(ruta, {headers: this.enc,observe:'response'});
+  }
 
   /*** Api Credenciales ****/
   getCredenciales(usuarioId:number){
@@ -98,13 +110,17 @@ export class ServidoresService {
     return this.httpClient.get<Credencial>(ruta,{headers: this.enc,observe:'response'});
   }
   guardaCredencial(usuarioId:number,aplicacionId:number,cred:Credencial|null){
-    let ruta=`${this.url}/usuario/${usuarioId}/credencial`;
+    let ruta=`${this.url}/usuario/${usuarioId}/aplicacion/${aplicacionId}/credencial`;
     if(cred!.id==0)
       return this.httpClient.post<Credencial>(ruta,cred,{headers: this.enc,observe:'response'});
     else{
       ruta=`${this.url}/usuario/${usuarioId}/aplicacion/${aplicacionId}/credencial/${cred!.id}`;
       return this.httpClient.put<Credencial>(ruta,cred,{headers: this.enc,observe:'response'});
     }
+  }
+  eliminaCredencial(usuarioId:number,id:number){
+    let ruta=`${this.url}/usuario/${usuarioId}/credencial/${id}`;
+    return this.httpClient.delete<number>(ruta, {headers: this.enc,observe:'response'});
   }
 
   /*** Api Login ****/
