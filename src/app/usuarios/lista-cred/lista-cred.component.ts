@@ -16,6 +16,7 @@ export class ListaCredComponent implements OnInit {
   credencial!:Credencial|null;
   frmCred:FormGroup;
   aplicaciones:any;
+  ver:boolean=true;
 
   constructor(private servidoresService:ServidoresService,private route:ActivatedRoute,
     private router:Router){
@@ -28,6 +29,7 @@ export class ListaCredComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+      this.ver=true;
       this.apps();
       this.consulta();
   }
@@ -112,5 +114,9 @@ export class ListaCredComponent implements OnInit {
           alert("Error al consultar servidores ");
       }
     });  
+  }
+
+  verOcultar(){
+    this.ver = !this.ver;
   }
 }

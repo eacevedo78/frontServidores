@@ -13,10 +13,12 @@
                 <input formControlName="id" type="hidden"/>
             </mat-form-field>
         </div>
+        <mat-slide-toggle [checked]="ver" (change)="verOcultar()">Ver/Ocultar
+        </mat-slide-toggle>
         <div>
             <mat-form-field appearance="fill" style="width: 50%">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" name="password" required>
+                <input matInput formControlName="password" name="password" [type]="ver ? 'text' : 'password'" required >
                 <mat-error *ngIf="frmCred.controls['password'].hasError('required')">El password es obligatorio</mat-error>
             </mat-form-field>
         </div>

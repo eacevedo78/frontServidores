@@ -4,6 +4,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { PieComponent } from './pie/pie.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -15,7 +16,8 @@ import { NavegacionComponent } from './navegacion/navegacion.component';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule
   ],
   exports:[
     EncabezadoComponent,

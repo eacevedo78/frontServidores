@@ -1,5 +1,9 @@
-<nav *ngIf="logueado()" style="text-align: right;font-size: 1em; text-align: right; width:90%">
-    <a [routerLink]="['usuarios']">Usuarios</a> |
+<nav *ngIf="logueado()" style="text-align: right;font-size: 1em; text-align: right; width:90%;margin-bottom: 50px;">
+    <button mat-button routerLink="usuarios">Usuarios</button> |
+    <button mat-button routerLink="servidores">Servidores</button> |
+    <button mat-button (click)="cerrar()">Cerrar Sesión</button>
+    <!--<a [routerLink]="['usuarios']">Usuarios</a> |
     <a [routerLink]="['servidores']">Servidores</a> |
     <a href="javascript: void(0)" (click)="cerrar()">Cerrar Sesión</a>
+    -->
 </nav>

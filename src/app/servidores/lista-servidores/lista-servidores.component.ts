@@ -43,7 +43,7 @@ export class ListaServidoresComponent implements OnInit {
       },
       error: (e) =>{
         //console.log(e);
-        if(e.status == 403)
+        if(e.status == 403 || e.status == 401)
           alert("No se puede eliminar: " + e.error.detail);
         else
           alert("Error al consultar servidores ");
